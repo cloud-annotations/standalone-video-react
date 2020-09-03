@@ -125,7 +125,7 @@ class App extends React.Component {
   videoRef = React.createRef()
   canvasRef = React.createRef()
 
-  componentDidMount() {
+  handleLoadedData = () => {
     const modelPromise = tf.loadGraphModel(MODEL_JSON)
     const labelsPromise = fetch(LABELS_URL).then(data => data.json())
     Promise.all([modelPromise, labelsPromise])
@@ -196,6 +196,7 @@ class App extends React.Component {
           ref={this.videoRef}
           width="1200"
           height="670"
+          onLoadedData={this.handleLoadedData}
         />
         <canvas
           className="size"
